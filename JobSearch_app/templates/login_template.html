@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Вход
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <label for="email_input">Электронная почта:</label>
+        <input id="email_input" name="email" type="email">
+        <br>
+
+        <label for="password_input">Пароль:</label>
+        <input id="password_input" name="password" type="password">
+        <br>
+
+        <input type="submit" value="Войти">
+    </form>
+{% endblock %}

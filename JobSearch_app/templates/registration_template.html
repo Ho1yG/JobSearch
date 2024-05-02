@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post" style="font-size: 22px;">
+        {% csrf_token %}
+        {% if message %}
+            <h3 style="color: red" align="center">{{ message }}</h3>
+        {% endif %}
+        <table align="center">
+            <tr>
+                <td><label for="email">Email:</label></td>
+                <td>
+                    <input id="email" type="email" name="email" value="{{ email }}">
+                </td>
+            </tr>
+            <tr>
+                <td><label for="pass1">Password:</label></td>
+                <td><input id="pass1" type="password" name="password1"></td>
+            </tr>
+            <tr>
+                <td><label for="pass2">Confirm:</label></td>
+                <td><input id="pass2" type="password" name="password2"></td>
+            </tr>
+        </table>
+        <center><input type="submit" value="Register"></center>
+    </form>
+{% endblock %}

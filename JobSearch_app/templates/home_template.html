@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1>Hello, {{ user.email }}!</h1>
+    {% else %}
+        <h1>Welcome to our website!</h1>
+    {% endif %}
+    <!-- Остальной контент вашей домашней страницы -->
+{% endblock %}
