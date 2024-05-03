@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
 from django.contrib import messages  # Added import statement
 from .models import CustomUser  # Added import statement
+
 def homeView(request):
     user = request.user
     context = {'user': user}
@@ -30,8 +31,8 @@ def registerView(request):
         return render(request, 'registration_template.html')
     elif request.method == 'POST':
         input_email = request.POST.get('email')
-        input_pass1 = request.POST.get('pass1')
-        input_pass2 = request.POST.get('pass2')
+        input_pass1 = request.POST.get('password1')
+        input_pass2 = request.POST.get('password2')
         this_user = CustomUser.objects.filter(email=input_email)
         if this_user.exists():
             context = {
@@ -44,6 +45,7 @@ def registerView(request):
                 'email': input_email
             }
             return render(request, 'registration_template.html', context=context)
+
         user = CustomUser.objects.create_user(email=input_email, password=input_pass1)
         login(request, user)
         return redirect('home_url')
