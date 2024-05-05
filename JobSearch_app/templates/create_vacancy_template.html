@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Create Vacancy
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <label for="title_input">Title of vacancy:</label>
+        <input id="title_input" name="title_input">
+        <br>
+        <label for="expyear">Experience required:</label>
+        <input id="expyear" name="expyear">
+        <br>
+        <label for="salary">Salary:</label>
+        <input id="salary" name="salary">
+        <br>
+        <label for="description_input">Description:</label>
+        <textarea id="description_input" name="description_input"></textarea>
+        <br>
+
+        <input type="submit" value="Create vacancy">
+    </form>
+
+{% endblock %}

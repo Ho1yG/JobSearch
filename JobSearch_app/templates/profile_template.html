@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <label for="birth_date">Birth Date:</label>
+    <input type="text" id="birth_date" name="birth_date" value="{{ user.birth_date }}" pattern="\d{2}/\d{2}/\d{4}" maxlength="10" placeholder="DD/MM/YYYY" oninput="formatDate(this)"><br>
+
+    <label for="specialty">Specialty:</label>
+    <input type="text" id="specialty" name="specialty" value="{{ user.specialty }}"><br>
+
+    <label for="experience">Experience:</label>
+    <input type="number" id="experience" name="experience" value="{{ user.experience }}" min="1" max="60"><br>
+
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}"><br>
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}"><br>
+
+    <input type="submit" value="Save">
+</form>
+
+<script>
+function formatDate(input) {
+    let value = input.value;
+    value = value.replace(/\D/g, '');
+
+    if (value.length > 2) {
+        value = value.slice(0, 2) + '/' + value.slice(2);
+    }
+    if (value.length > 5) {
+        value = value.slice(0, 5) + '/' + value.slice(5, 9);
+    }
+
+    input.value = value;
+}
+</script>
+{% endblock %}

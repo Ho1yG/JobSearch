@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Registration
+    Company Registration
 {% endblock %}
 
 {% block content %}
@@ -25,9 +25,25 @@
                 <td><label for="pass2">Confirm:</label></td>
                 <td><input id="pass2" type="password" name="password2"></td>
             </tr>
+            <tr>
+                <td><label for="company_name">Company Name:</label></td>
+                <td>
+                    <input id="company_name" name="company_name" value="{{ company_name }}">
+                </td>
+            </tr>
+            <tr>
+                <td><label for="company_address">Company Address:</label></td>
+                <td>
+                    <input id="company_address" name="company_address" value="{{ company_address }}">
+                </td>
+            </tr>
+            <tr>
+                <td><label for="industry">Company Industry:</label></td>
+                <td>
+                    <input id="industry" name="industry" value="{{ industry }}">
+                </td>
+            </tr>
         </table>
-        <center><input type="submit" value="Register"></center>
+        <center><input type="submit" value="Register Company"></center>
     </form>
-    <a class="nav-link" href="{% url 'register_company_url' %}">Register as company</a>
-
 {% endblock %}

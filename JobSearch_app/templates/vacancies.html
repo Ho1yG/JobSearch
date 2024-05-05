@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Vacancies
+{% endblock %}
+
+{% block content %}
+    {% for vacancy in vacancies %}
+
+            <div class="card mb-3 mt-5 w-50">
+                <a href="{% url 'vacancy_detail_url' vacancy.id %}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ vacancy.title }}</h5>
+                        <p class="card-text">Experience - {{ vacancy.expyear }} year</p>
+                        <p class="card-text">Salary - {{ vacancy.salary }}kk/ns</p>
+                        <p class="card-text">Company - {{ vacancy.company.company_name }}</p>
+                    </div>
+                </a>
+            </div>
+
+    {% endfor %}
+
+{% endblock %}

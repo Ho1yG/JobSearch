@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include  # Импортируем include
-from JobSearch_app.views import homeView
+from JobSearch_app.views import homeView, vacanciesView
 
 urlpatterns = [
     path('', homeView, name='home_url'),
+
+    path('vacancies', vacanciesView, name='vacancies_url'),
     path('admin/', admin.site.urls),
     path('JobSearch_app/', include('JobSearch_app.urls')),  # Добавляем URL-адреса вашего приложения
 ]

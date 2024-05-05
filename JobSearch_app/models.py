@@ -27,24 +27,29 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser):
     email = models.EmailField(unique=True)
     is_staff = models.BooleanField(default=False)
+    is_company = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(auto_now_add=True)
+    birth_date = models.CharField(max_length=10, blank=True)
+    specialty = models.CharField(max_length=20, blank=True)
+    experience = models.PositiveIntegerField(default=0)
+    first_name = models.CharField(max_length=15, blank=True)
+    last_name = models.CharField(max_length=15, blank=True)
+    company_name = models.CharField(max_length=15, blank=True)
+    company_address = models.CharField(max_length=25, blank=True)
+    industry = models.CharField(max_length=25, blank=True)
+
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
 
-    def str(self):
+    def __str__(self):
         return self.email
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
-    birth_date = models.DateField(null=True, blank=True)
-    specialty = models.CharField(max_length=20, blank=True)
-    experience = models.PositiveSmallIntegerField(default=0)
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=30, blank=True)
+
 
 class Company(models.Model):
     name = models.CharField(max_length=100)
@@ -54,7 +59,7 @@ class Company(models.Model):
 class Vacancy(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     expyear = models.IntegerField()
     salary = models.DecimalField(max_digits=10, decimal_places=2)
 
