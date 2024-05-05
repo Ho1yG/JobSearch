@@ -38,6 +38,7 @@ class CustomUser(AbstractBaseUser):
     company_name = models.CharField(max_length=15, blank=True)
     company_address = models.CharField(max_length=25, blank=True)
     industry = models.CharField(max_length=25, blank=True)
+    description = models.CharField(max_length=200, blank=True)
 
 
 
@@ -50,20 +51,29 @@ class CustomUser(AbstractBaseUser):
         return self.email
 
 
+class Category(models.Model):
+    category_name = models.CharField(max_length=100)
 
-class Company(models.Model):
-    name = models.CharField(max_length=100)
-    industry = models.CharField(max_length=100)
-    address = models.CharField(max_length=255)
+class WorkType(models.Model):
+    type_name = models.CharField(max_length=100)
+
+
 
 class Vacancy(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     company = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     expyear = models.IntegerField()
-    salary = models.DecimalField(max_digits=10, decimal_places=2)
+    salary = models.IntegerField()
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    work_type = models.ForeignKey(WorkType, on_delete=models.CASCADE, default=1)
+
+
 
 class Applicant(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     vacancy = models.ForeignKey(Vacancy, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
+
+
+

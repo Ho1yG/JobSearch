@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Applicant Detail - {{ applicant.vacancy.title }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h2>{{ applicant.vacancy.title }}</h2>
+    <div class="card mb-3">
+        <div class="card-body">
+            <p class="card-text"><strong>Vacancy company:</strong> {{ applicant.vacancy.company.company_name }}</p>
+            <p class="card-text"><strong>Vacancy name:</strong> {{ applicant.vacancy.title }}</p>
+            <p class="card-text"><strong>Vacancy experience:</strong> {{ applicant.vacancy.expyear }}</p>
+            <p class="card-text"><strong>Vacancy salary:</strong> {{ applicant.vacancy.salary }}</p>
+            <p class="card-text"><strong>Vacancy category:</strong> {{ applicant.vacancy.category.category_name }}</p>
+            <p class="card-text"><strong>Vacancy work type:</strong> {{ applicant.vacancy.work_type.type_name }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ applicant.status }}</p>
+
+        </div>
+    </div>
+    <a href="{% url 'applicants_url' %}" class="btn btn-secondary">Back to Applicants</a>
+    <a href="{% url 'delete_applicants_url' applicant.id %}" class="btn btn-danger">Delete Applicant</a>
+</div>
+{% endblock %}

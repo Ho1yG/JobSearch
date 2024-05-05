@@ -5,19 +5,42 @@
 {% endblock %}
 
 {% block content %}
-    {% for vacancy in vacancies %}
+    <div class="container mt-3">
+        <!-- Форма поиска -->
+        <form method="GET">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search by title" name="search">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
 
-            <div class="card mb-3 mt-5 w-50">
+        <!-- Форма фильтрации по категориям -->
+        <form method="GET" class="d-flex gap-3 align-items-center">
+            {% csrf_token %}
+            <div class="mb-3 d-flex gap-2">
+                <label for="category">Filter by Category:</label><br>
+                {% for category in categories %}
+                    <input type="checkbox" id="{{ category.id }}" name="category" value="{{ category.id }}">
+                    <label for="{{ category.id }}">{{ category.category_name }}</label><br>
+                {% endfor %}
+            </div>
+            <button class="btn btn-primary" type="submit">Apply Filters</button>
+        </form>
+
+        <!-- Вакансии -->
+        {% for vacancy in vacancies %}
+            <div class="card mb-3 mt-3 w-50">
                 <a href="{% url 'vacancy_detail_url' vacancy.id %}">
                     <div class="card-body">
                         <h5 class="card-title">{{ vacancy.title }}</h5>
                         <p class="card-text">Experience - {{ vacancy.expyear }} year</p>
                         <p class="card-text">Salary - {{ vacancy.salary }}kk/ns</p>
                         <p class="card-text">Company - {{ vacancy.company.company_name }}</p>
+                        <p class="card-text">Category - {{ vacancy.category.category_name }}</p>
+                        <p class="card-text">Work type - {{ vacancy.work_type.type_name }}</p>
                     </div>
                 </a>
             </div>
-
-    {% endfor %}
-
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    User Profile - {{ applicant.user }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3>User Profile - {{ applicant.user.first_name }}</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>Firstname:</strong> {{ applicant.user.first_name }}</p>
+            <p><strong>Lastname:</strong> {{ applicant.user.last_name }}</p>
+            <p><strong>Email:</strong> {{ applicant.user.email }}</p>
+            <p><strong>Speciality:</strong> {{ applicant.user.specialty }}</p>
+            <p><strong>Experience:</strong> {{ applicant.user.experience }}</p>
+            <p><strong>Description:</strong> {{ applicant.user.description }}</p>
+            <a href="{% url 'change_application_status_url' applicant.id %}?status=Approved">Approve</a>
+            <a href="{% url 'change_application_status_url' applicant.id %}?status=Denied">Denied</a>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}

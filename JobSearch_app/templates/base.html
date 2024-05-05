@@ -36,14 +36,24 @@
                                 <a class="nav-link" href="{% url 'create_vacancy_url' %}">Create Vacancy</a>
                             </li>
                         {% endif %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout_url' %}">Logout</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'profile_url' %}">Profile</a>
-                        </li>
+
+                        {% if user.is_company %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'company_profile_url' %}">Company Profile</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'profile_url' %}">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'applicants_url' %}">My Applicants</a>
+                            </li>
+                        {% endif %}
                         <li class="nav-item">
                             <span class="nav-link">Welcome, {{ user.email }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout_url' %}">Logout</a>
                         </li>
                     {% endif %}
                 </ul>

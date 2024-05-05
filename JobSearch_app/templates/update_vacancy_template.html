@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Update Vacancy
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h1 class="mt-5">Update Vacancy</h1>
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="title_input" class="form-label">Title of vacancy:</label>
+            <input id="title_input" name="title_input" class="form-control" value="{{ vacancy.title }}">
+        </div>
+        <div class="mb-3">
+            <label for="expyear" class="form-label">Experience required:</label>
+            <input id="expyear" name="expyear" class="form-control" value="{{ vacancy.expyear }}">
+        </div>
+        <div class="mb-3">
+            <label for="salary" class="form-label">Salary:</label>
+            <input id="salary" name="salary" class="form-control" value="{{ vacancy.salary }}">
+        </div>
+        <div class="mb-3">
+            <label for="category_select" class="form-label">Category:</label>
+            <select id="category_select" name="category_select" class="form-control">
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category.id == vacancy.category.id %}selected{% endif %}>{{ category.category_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="worktype_select" class="form-label">Work Type:</label>
+            <select id="worktype_select" name="worktype_select" class="form-control">
+                {% for worktype in worktypes %}
+                    <option value="{{ worktype.id }}" {% if worktype.id == vacancy.work_type.id %}selected{% endif %}>{{ worktype.type_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="description_input" class="form-label">Description:</label>
+            <textarea id="description_input" name="description_input" class="form-control">{{ vacancy.description }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Vacancy</button>
+    </form>
+</div>
+{% endblock %}

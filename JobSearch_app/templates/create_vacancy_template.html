@@ -5,31 +5,52 @@
 {% endblock %}
 
 {% block content %}
-    <form action="" method="post">
-        {% csrf_token %}
+    <div class="container mt-5">
+        <form action="" method="post">
+            {% csrf_token %}
 
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+            {% if messages %}
+                <ul class="list-unstyled">
+                    {% for message in messages %}
+                        <li class="text-danger">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
-        <label for="title_input">Title of vacancy:</label>
-        <input id="title_input" name="title_input">
-        <br>
-        <label for="expyear">Experience required:</label>
-        <input id="expyear" name="expyear">
-        <br>
-        <label for="salary">Salary:</label>
-        <input id="salary" name="salary">
-        <br>
-        <label for="description_input">Description:</label>
-        <textarea id="description_input" name="description_input"></textarea>
-        <br>
+            <div class="mb-3">
+                <label for="title_input" class="form-label">Title of vacancy:</label>
+                <input id="title_input" name="title_input" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="expyear" class="form-label">Experience required:</label>
+                <input id="expyear" name="expyear" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="salary" class="form-label">Salary:</label>
+                <input id="salary" name="salary" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="description_input" class="form-label">Description:</label>
+                <textarea id="description_input" name="description_input" class="form-control"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Category:</label>
+                <select id="category" name="category" class="form-select">
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.category_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="worktype" class="form-label">Work Type:</label>
+                <select id="worktype" name="worktype" class="form-select">
+                    {% for worktype in worktypes %}
+                        <option value="{{ worktype.id }}">{{ worktype.type_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        <input type="submit" value="Create vacancy">
-    </form>
-
+            <button type="submit" class="btn btn-primary">Create vacancy</button>
+        </form>
+    </div>
 {% endblock %}

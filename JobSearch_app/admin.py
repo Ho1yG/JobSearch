@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import Company, Vacancy, Applicant
+from .models import WorkType, Category, Vacancy, Applicant
 
 # Регистрация моделей в административном интерфейсе
-admin.site.register(Company)
+
+admin.site.register(WorkType)
+admin.site.register(Category)
 admin.site.register(Vacancy)
 admin.site.register(Applicant)
