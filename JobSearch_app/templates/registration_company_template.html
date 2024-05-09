@@ -7,7 +7,7 @@
 {% block content %}
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-3 mt-5">
+            <div class="col-md-6 mt-5">
                 <form action="" method="post">
                     {% csrf_token %}
                     {% if message %}
@@ -15,27 +15,27 @@
                     {% endif %}
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
-                        <input id="email" type="email" name="email" class="form-control" value="{{ email }}">
+                        <input id="email" type="email" name="email" class="form-control" value="{{ email }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="pass1" class="form-label">Password:</label>
-                        <input id="pass1" type="password" name="password1" class="form-control">
+                        <input id="pass1" type="password" name="password1" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label for="pass2" class="form-label">Confirm:</label>
-                        <input id="pass2" type="password" name="password2" class="form-control">
+                        <label for="pass2" class="form-label">Confirm Password:</label>
+                        <input id="pass2" type="password" name="password2" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="company_name" class="form-label">Company Name:</label>
-                        <input id="company_name" name="company_name" class="form-control" value="{{ company_name }}">
+                        <input id="company_name" name="company_name" class="form-control" value="{{ company_name }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="company_address" class="form-label">Company Address:</label>
-                        <input id="company_address" name="company_address" class="form-control" value="{{ company_address }}">
+                        <input id="company_address" name="company_address" class="form-control" value="{{ company_address }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="industry" class="form-label">Company Industry:</label>
-                        <input id="industry" name="industry" class="form-control" value="{{ industry }}">
+                        <input id="industry" name="industry" class="form-control" value="{{ industry }}" required>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Register Company</button>

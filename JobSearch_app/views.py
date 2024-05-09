@@ -5,6 +5,15 @@ from .models import *  # Added import statement
 from django.contrib.auth.decorators import login_required
 
 
+@login_required
+def delete_account_view(request):
+    if request.method == 'GET':
+        return render(request, 'confirm_delete_account.html')
+    elif request.method == 'POST':
+
+        user = request.user
+        user.delete()
+        return redirect('home_url')
 
 
 def delete_applicant_view(request, applicant_id):
@@ -16,48 +25,43 @@ def delete_applicant_view(request, applicant_id):
 
 
 def applicant_detail_view(request, applicant_id):
-    # Retrieve the applicant object
+
     applicant = get_object_or_404(Applicant, id=applicant_id)
 
-    # Pass the applicant object to the template
     context = {'applicant': applicant}
     return render(request, 'applicant_detail.html', context)
 
 @login_required
 def aplicantsView(request):
-    # Retrieve all applicants related to the current user
+
     user_applicants = Applicant.objects.filter(user=request.user)
 
-    # Pass the list of applicants to the template
     context = {'applicants': user_applicants}
     return render(request, 'applicants_template.html', context)
 
 @login_required
 def delete_user_view(request):
-    # Retrieve the user object
     user = request.user
-
     user.delete()
     return redirect('home_url')
 
 @login_required
 def change_application_status_view(request, applicant_id):
     if request.method == 'GET':
-        # Get the applicant object
+
         applicant = get_object_or_404(Applicant, id=applicant_id)
 
-        # Get the new status from the query parameters
         new_status = request.GET.get('status')
 
         if new_status:
-            # Update the applicant's status
+
             applicant.status = new_status
             applicant.save()
 
-        # Redirect back to the vacancy page
+
         return redirect('view_vacancy_url', vacancy_id=applicant.vacancy.id)
     else:
-        # If the request method is not GET, handle it accordingly
+
         return redirect('error_url')
 @login_required
 def viewUserVacancyView(request, applicant_id):
